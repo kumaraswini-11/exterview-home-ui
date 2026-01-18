@@ -108,7 +108,7 @@ export const HeroSection = () => {
 
       {/* Dashboard Preview */}
       <div
-        className="relative mt-auto mb-12 w-full max-w-5xl overflow-visible rounded-t-3xl border-x border-t border-white/30 px-4 shadow-2xl"
+        className="relative mt-auto mb-12 w-full max-w-5xl overflow-visible rounded-t-3xl px-4 shadow-2xl"
         style={{ perspective: 1000 }}
       >
         <Image

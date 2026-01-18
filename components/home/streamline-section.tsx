@@ -4,9 +4,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
-import { cn } from "@/lib/utils";
-
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 const SLIDES = [
   {
@@ -27,32 +31,20 @@ const SLIDES = [
     image:
       "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab7577d_cc841eac96c856d15018d49316af12cf_work%20process%202-p-2000.png",
     title: "Completed Interviews",
-    description:
-      "Measures how many interviews were successfully conducted.",
+    description: "Measures how many interviews were successfully conducted.",
   },
 ];
 
 export function StreamlineSection() {
-  const [index, setIndex] = useState(0);
-
-  const prev = () =>
-    setIndex((i) => (i === 0 ? SLIDES.length - 1 : i - 1));
-  const next = () =>
-    setIndex((i) => (i === SLIDES.length - 1 ? 0 : i + 1));
+  const [api, setApi] = useState<CarouselApi | undefined>();
 
   return (
-    <section
-      className={cn(
-        "relative overflow-hidden bg-black py-28",
-        "bg-[url('https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab757b3_bg.avif')] bg-cover bg-center"
-      )}
-    >
-      {/* BACKGROUND WORD */}
+    <section className="relative overflow-hidden bg-black bg-[url('https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab757b3_bg.avif')] bg-cover bg-center py-28">
+      {/* Background Word */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-       <span className="select-none whitespace-nowrap text-[20vw] font-extrabold leading-none tracking-tight text-white/10">
-  Exterview
-</span>
-
+        <span className="animate-marquee text-[20vw] leading-none font-extrabold tracking-tight whitespace-nowrap text-white/10 select-none">
+          Exterview
+        </span>
       </div>
 
       {/* Content */}
@@ -61,45 +53,55 @@ export function StreamlineSection() {
           Streamline Your Process
         </h2>
 
-        {/* Card wrapper */}
         <div className="relative mx-auto mt-20 max-w-2xl">
-          {/* Glass Card */}
-          <div className="rounded-4xl border border-white/15 bg-white/4 p-10 backdrop-blur-sm shadow-inner">
-            <p className="text-xl text-white/70">
-              Organisation Business Key Metrics – (03)
-            </p>
+          {/* Carousel Card */}
+          <Carousel
+            setApi={setApi}
+            opts={{ loop: true }}
+            className="rounded-4xl border border-white/15 bg-white/4 p-10 shadow-inner backdrop-blur-sm"
+          >
+            <CarouselContent className="-ml-4">
+              {SLIDES.map((slide, i) => (
+                <CarouselItem key={i} className="basis-full">
+                  <div>
+                    <p className="text-xl text-white/70">
+                      Organisation Business Key Metrics – (03)
+                    </p>
 
-            <div className="mt-10 flex justify-center">
-              <Image
-                src={SLIDES[index].image}
-                alt={SLIDES[index].title}
-                width={400}
-                height={300}
-              />
-            </div>
+                    <div className="mt-10 flex justify-center">
+                      <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        width={400}
+                        height={300}
+                      />
+                    </div>
 
-            <h3 className="mt-8 text-3xl font-bold text-white">
-              {SLIDES[index].title}
-            </h3>
+                    <h3 className="mt-8 text-3xl font-bold text-white">
+                      {slide.title}
+                    </h3>
 
-            <p className="mt-3 max-w-xl text-base text-white">
-              {SLIDES[index].description}
-            </p>
-          </div>
+                    <p className="mt-3 max-w-xl text-base text-white">
+                      {slide.description}
+                    </p>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
 
-          {/* LEFT ARROW — BASELINE ALIGNED */}
+          {/* Carousel Navigation Buttons */}
           <Button
             size="icon-lg"
-            onClick={prev}
-            className="absolute -left-20 bottom-1 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
+            onClick={() => api?.scrollPrev()}
+            className="absolute bottom-1 -left-20 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
           >
-            <ArrowLeft className=" size-9 -rotate-45" />
+            <ArrowLeft className="size-9 -rotate-45" />
           </Button>
 
-          {/* RIGHT ARROW — BASELINE ALIGNED */}
           <Button
             size="icon-lg"
-            onClick={next}
+            onClick={() => api?.scrollNext()}
             className="absolute -right-20 bottom-1 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
           >
             <ArrowRight className="size-9 -rotate-45" />

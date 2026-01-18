@@ -206,8 +206,8 @@ export const Footer = () => {
             aria-hidden="true"
           >
             <h2
-              className="animate-glow-pulse text-[120px] leading-none font-extrabold tracking-wider text-transparent sm:text-[150px] lg:text-[170px]"
-              style={{ WebkitTextStroke: "1px #0033a0" }}
+              className="animate-glow-pulse text-[14vw] leading-none font-extrabold tracking-wider text-transparent"
+              style={{ WebkitTextStroke: "10px #0033a0" }}
             >
               Exterview
             </h2>

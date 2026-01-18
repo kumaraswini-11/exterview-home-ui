@@ -9,7 +9,7 @@ export function SamayaSection() {
       <div className="text-center">
         <Badge className="px-6 py-1.5 text-sm font-bold">Samay</Badge>
 
-        <h2 className="mt-4 text-[48px] font-semibold leading-tight text-black">
+        <h2 className="mt-4 text-[48px] leading-tight font-semibold text-black">
           Meet Smaya. Your AI Agent For End To End <br />
           Recruitment Activities
         </h2>
