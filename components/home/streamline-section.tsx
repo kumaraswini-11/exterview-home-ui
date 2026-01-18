@@ -1,0 +1,111 @@
+"use client";
+
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+
+import { cn } from "@/lib/utils";
+
+import { Button } from "../ui/button";
+
+const SLIDES = [
+  {
+    image:
+      "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab75781_62d81c55e750b2364a0694b96850154b_work%20process%203-p-2000.png",
+    title: "Hired",
+    description:
+      "Indicates how many candidates were finally selected after the interview process.",
+  },
+  {
+    image:
+      "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68d39def68f35b05a96d0cab_ChatGPT%20Image%20Sep%2024%2C%202025%2C%2012_57_19%20PM%201-p-2000.png",
+    title: "Scheduled Interviews",
+    description:
+      "Tracks how many interviews (AI or Human) have been scheduled.",
+  },
+  {
+    image:
+      "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab7577d_cc841eac96c856d15018d49316af12cf_work%20process%202-p-2000.png",
+    title: "Completed Interviews",
+    description:
+      "Measures how many interviews were successfully conducted.",
+  },
+];
+
+export function StreamlineSection() {
+  const [index, setIndex] = useState(0);
+
+  const prev = () =>
+    setIndex((i) => (i === 0 ? SLIDES.length - 1 : i - 1));
+  const next = () =>
+    setIndex((i) => (i === SLIDES.length - 1 ? 0 : i + 1));
+
+  return (
+    <section
+      className={cn(
+        "relative overflow-hidden bg-black py-28",
+        "bg-[url('https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab757b3_bg.avif')] bg-cover bg-center"
+      )}
+    >
+      {/* BACKGROUND WORD */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+       <span className="select-none whitespace-nowrap text-[20vw] font-extrabold leading-none tracking-tight text-white/10">
+  Exterview
+</span>
+
+      </div>
+
+      {/* Content */}
+      <div className="relative mx-auto max-w-7xl px-6 md:px-16">
+        <h2 className="text-center text-[56px] font-semibold text-white">
+          Streamline Your Process
+        </h2>
+
+        {/* Card wrapper */}
+        <div className="relative mx-auto mt-20 max-w-2xl">
+          {/* Glass Card */}
+          <div className="rounded-4xl border border-white/15 bg-white/4 p-10 backdrop-blur-sm shadow-inner">
+            <p className="text-xl text-white/70">
+              Organisation Business Key Metrics – (03)
+            </p>
+
+            <div className="mt-10 flex justify-center">
+              <Image
+                src={SLIDES[index].image}
+                alt={SLIDES[index].title}
+                width={400}
+                height={300}
+              />
+            </div>
+
+            <h3 className="mt-8 text-3xl font-bold text-white">
+              {SLIDES[index].title}
+            </h3>
+
+            <p className="mt-3 max-w-xl text-base text-white">
+              {SLIDES[index].description}
+            </p>
+          </div>
+
+          {/* LEFT ARROW — BASELINE ALIGNED */}
+          <Button
+            size="icon-lg"
+            onClick={prev}
+            className="absolute -left-20 bottom-1 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
+          >
+            <ArrowLeft className=" size-9 -rotate-45" />
+          </Button>
+
+          {/* RIGHT ARROW — BASELINE ALIGNED */}
+          <Button
+            size="icon-lg"
+            onClick={next}
+            className="absolute -right-20 bottom-1 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
+          >
+            <ArrowRight className="size-9 -rotate-45" />
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}
