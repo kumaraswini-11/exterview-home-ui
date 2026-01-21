@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { IMAGES, NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -18,6 +19,7 @@ function NavLinks({ onClick, variant = "desktop" }: NavLinksProps) {
   return (
     <>
       {NAV_LINKS.map(({ label, href }) => {
+        // Note: In production will ue usePathName for actual url
         const isActive = label === "Home";
 
         const baseStyles = "font-semibold transition-all";
@@ -100,6 +102,9 @@ export function Header() {
           >
             Book a Demo
           </Button>
+          
+          {/* Theme Switcher */}
+          <ThemeSwitcher />
 
           {/* Mobile Menu Toggle */}
           <Button

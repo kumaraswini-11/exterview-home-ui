@@ -26,9 +26,9 @@ const FloatingIcon = ({
   controls,
 }: FloatingIconProps) => (
   <motion.div
-    initial={{ y: 0, rotate }}
-    animate={controls}
-    transition={{ type: "spring", stiffness: 60, damping: 15 }}
+    initial={{ y: 0, rotate }} // initial → starting position
+    animate={controls} // animate={controls} → animation is controlled externally
+    transition={{ type: "spring", stiffness: 60, damping: 15 }} // spring animation → natural, smooth motion
     className="absolute hidden size-26 items-center justify-center rounded-xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-md lg:flex"
     style={{ top, left, right }}
   >
